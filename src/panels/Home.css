@@ -1,0 +1,132 @@
+#map {
+  width: 100vh;
+  height: 100vh;
+}
+.map {
+  width: 100vh;
+  height: 100vh;
+}
+.text {
+  display: flex;
+  align-items: flex-start;
+  width: 250px;
+  height: 10px;
+}
+.place_title {
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: white;
+  padding: 5px;
+  padding-top: 0;
+  padding-left: 0;
+  margin-left: 30px;
+}
+.text_small {
+  font-size: 14px;
+}
+.select__tabs{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.vkuiTabs--default .vkuiTabsItem__in{
+    overflow: visible;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.nav__item h3 {
+    font-size: 13px;
+    color: #99a2ad;
+  }
+  
+  .item__card:last-child {
+    margin-bottom: 150px;
+  }
+  .vkuiDiv--android {
+    padding: 11px 13px;
+    display: flex;
+    justify-content: center;
+  }
+  .header {
+    margin-bottom: 50px;
+  }
+  .header__title {
+    margin-top: 15px;
+    display: flex;
+    padding-bottom: 0;
+    font-weight: bold;
+    color: black;
+    justify-content: center;
+  }
+  .header__title .vkuiCaption--l-1 {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    text-transform: none;
+    height: 25px;
+    margin-top: 5px;
+  }
+  .vkuiHeader__main{
+      margin: 0;
+  }
+  .header__title .vkuiHeader__content-base{
+      overflow: visible;
+  }
+  .cards__container {
+    margin-top: 50px;
+    overflow: scroll;
+  }
+ /*  .vkuiPanelHeader__right {
+    display: none;
+  }
+  .vkuiSimpleCell__after {
+    display: none;
+  } */
+  /* .vkuiPanelHeader */
+  .vkuiSearch__after-in {
+    color: #ff920a;
+  }
+  
+
+  .vkuiDiv--ios {
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+  }
+  .icon_custom {
+    background-color: white;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    z-index: -999;
+  }
+  .header__home{
+      margin-top: 0px;
+  }

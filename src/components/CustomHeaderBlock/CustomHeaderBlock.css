@@ -1,0 +1,30 @@
+.header__block{
+    background-color: orange;
+  }
+  .header__block-options{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 400px;
+  }
+  .header__block-title{
+    color: white;
+    font-weight: bold;
+    font-size: 28px;
+    max-width: 220px;
+    padding: 10px;
+  }
+  .vkuiSearch{
+    background-color: inherit;
+  }
+  .header__block-search{
+    max-width: 70%;
+  }
+ .Search__after{
+   display: none;
+ }
+ .geo{
+   background-color: white;
+   padding: 10px;
+   border-radius: 10px;
+ }

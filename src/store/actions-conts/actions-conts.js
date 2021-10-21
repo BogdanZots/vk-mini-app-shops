@@ -1,0 +1,7 @@
+// SHOP
+export const GET_ALL_SHOPS = "GET_ALL_SHOPS";
+export const CHECK_PANEL = "CHECK_PANEL";
+export const CHECK_VIEW = "CHECK_VIEW";
+export const SET_CURRENT_SHOP_MENU = "SET_CURRENT_SHOP_MENU";
+// USER
+export const SET_USER_GEO_DATA = "SET_USER_GEO_DATA";
