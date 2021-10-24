@@ -30,10 +30,10 @@ const userReducer = (state = initialState, action) => {
 
 export const setUserGeoData = (location) => {
   return async function (dispatch) {
-    const geoData = await UserService.getGeo(
+/*     const geoData = await UserService.getGeo(
       `https://nominatim.openstreetmap.org/reverse?lat=${location.lat}&lon=${location.long}&zoom=18&addressdetails=1&format=json`
     );
-    dispatch(setUserGeoDataAC(geoData.data.address));
+    dispatch(setUserGeoDataAC(geoData.data.address)); */
   };
 };
 

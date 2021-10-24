@@ -13,29 +13,26 @@
   width: 100%;
   justify-content: space-around;
 }
-.shop{
+.shop {
   margin-right: 10%;
 }
 
-
-.vkuiTabs__in{
+.vkuiTabs__in {
   max-width: 460px;
 }
-#map_point{
+#map_point {
   width: 60px;
   height: 60px;
-  background-color: red;
 }
-.map_point{
+.map_point {
   width: 60px;
   height: 60px;
-  background-color: red;
 }
-.place_title{
+.place_title {
   width: 150px;
-  margin-left: 55px;
-  transform: translateY(-30px);
+  margin-left: 40px;
+  transform: translateY(-60px);
 }
-.header__block-map{
+.header__block-map {
   max-width: 400px;
 }

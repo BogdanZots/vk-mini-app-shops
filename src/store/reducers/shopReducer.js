@@ -86,7 +86,7 @@ export const setCurrentShop = (id) => {
   console.log("ID", id);
   return async function (dispatch) {
     try {
-      const menu = await ShopService.getCurrentShopMenu(
+/*       const menu = await ShopService.getCurrentShopMenu(
         CURRENT_SHOP_MENU_URL + id
       );
       const categories = await ShopService.getCurrentShopCategories(
@@ -98,7 +98,7 @@ export const setCurrentShop = (id) => {
           categories: categories.data,
           shopId: id,
         })
-      );
+      ); */
       console.log(menu, categories);
     } catch (e) {
       console.log(e);

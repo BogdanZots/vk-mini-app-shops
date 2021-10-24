@@ -15,3 +15,7 @@ export const PANELS = {
   CURRENT_CAFFE_PANEL: "current-caffe-panel",
   MAP_PANEL: "map-panel",
 };
+
+
+
+

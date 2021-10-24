@@ -4,7 +4,7 @@
   .header__block-options{
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
     max-width: 400px;
   }
   .header__block-title{
@@ -27,4 +27,5 @@
    background-color: white;
    padding: 10px;
    border-radius: 10px;
+   display: none;
  }
