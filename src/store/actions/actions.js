@@ -14,14 +14,12 @@ export const setAllShopsAC = (payload) => {
 };
 
 export const checkActivePanelAC = (payload) => {
-  console.log("payload", payload);
   return {
     type: CHECK_PANEL,
     payload,
   };
 };
 export const checkActiveViewAC = (payload) => {
-  console.log("payload", payload);
   return {
     type: CHECK_VIEW,
     payload,

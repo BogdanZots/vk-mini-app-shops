@@ -10,53 +10,15 @@ import {
   TabsItem,
   Tabs,
 } from "@vkontakte/vkui";
-import { useDispatch , useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCurrentShop } from "../store/reducers/shopReducer";
 import CustomHeaderBlock from "../components/CustomHeaderBlock/CustomHeaderBlock";
 
-
 const Home = ({ id, go, fetchedUser, shops }) => {
-  const {userAdress} = useSelector(store=>store.user)
+  const { userAdress } = useSelector((store) => store.user);
   const dispatch = useDispatch();
-  const filteredShops = /* shops || */ [
-    {
-      "id": 1,
-      "name": "string1",
-      "description": "string1",
-      "addressText": "string1",
-      "phone": "string1",
-      "img": "https://cdn2.iconfinder.com/data/icons/basic-flat-icon-set/128/store-256.png",
-      "middleRate": 0,
-    },
-    {
-      "id": 2,
-      "name": "string2",
-      "description": "string2",
-      "addressText": "string2",
-      "phone": "string2",
-      "img": "https://cdn2.iconfinder.com/data/icons/basic-flat-icon-set/128/store-256.png",
-      "middleRate": 0,
-    }
-    ,  {
-      "id": 3,
-      "name": "string3",
-      "description": "string3",
-      "addressText": "string3",
-      "phone": "string3",
-      "img": "https://cdn2.iconfinder.com/data/icons/basic-flat-icon-set/128/store-256.png",
-      "middleRate": 0,
-    }
-    ,  {
-      "id": 4,
-      "name": "string4",
-      "description": "string4",
-      "addressText": "string4",
-      "phone": "string4",
-      "img": "https://cdn2.iconfinder.com/data/icons/basic-flat-icon-set/128/store-256.png",
-      "middleRate": 0,
-    }
-  ];
-  console.log(filteredShops);
+  
+  const filteredShops = shops;
   return (
     <Panel id={id}>
       <CustomHeaderBlock />
@@ -97,6 +59,7 @@ const Home = ({ id, go, fetchedUser, shops }) => {
               const id = shop.id;
               return (
                 <ContentCard
+                className="card"
                   onClick={(e) => {
                     dispatch(setCurrentShop(id));
                     go(e.target.closest(".cards__container"));
@@ -105,9 +68,9 @@ const Home = ({ id, go, fetchedUser, shops }) => {
                   className='item__card'
                   image={shop.img}
                   src={shop.img}
-                  subtitle={"КОФЕЙНЯ " + shop.name}
-                  header={shop.description}
-                  caption={shop.addressText}></ContentCard>
+                  subtitle={"Часы работы " + shop.workingFrom  + " - " + shop.workingTo}
+                  header={"Рейтинг : " + shop.middleRate}
+                  caption={"Адрес : " + shop.addressText}></ContentCard>
               );
             })}
         </CardGrid>

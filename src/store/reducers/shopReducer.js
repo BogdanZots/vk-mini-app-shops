@@ -34,7 +34,11 @@ const initialState = {
     img: "",
     name: "",
     menu: [],
+    middleRate: null,
+    addressText: "",
     catigories: [],
+    workingFrom: "",
+    workingTo: "",
   },
 };
 
@@ -59,11 +63,17 @@ const shopsReducer = (state = initialState, action) => {
         ...stateCopy,
       };
     case SET_CURRENT_SHOP_MENU:
+      console.log("ACTION", action);
       const id = +action.payload.shopId;
       stateCopy.currentShop.catigories = action.payload.categories;
       stateCopy.currentShop.menu = action.payload.menu;
       stateCopy.currentShop.name = stateCopy.shops[id - 1].name;
       stateCopy.currentShop.img = stateCopy.shops[id - 1].img;
+      stateCopy.currentShop.workingFrom = stateCopy.shops[id - 1].workingFrom;
+      stateCopy.currentShop.workingTo = stateCopy.shops[id - 1].workingTo;
+      stateCopy.currentShop.addressText = stateCopy.shops[id - 1].addressText;
+      stateCopy.currentShop.middleRate = stateCopy.shops[id - 1].middleRate;
+
       return {
         ...stateCopy,
       };
@@ -83,11 +93,10 @@ export const setAllShops = () => {
   };
 };
 export const setCurrentShop = (id) => {
-  console.log("ID", id);
   return async function (dispatch) {
     try {
-/*       const menu = await ShopService.getCurrentShopMenu(
-        CURRENT_SHOP_MENU_URL + id
+      const menu = await ShopService.getCurrentShopMenu(
+        `${CURRENT_SHOP_MENU_URL}${id}/menu`
       );
       const categories = await ShopService.getCurrentShopCategories(
         `${CURRENT_SHOP_MENU_URL}${id}/${CURRENT_SHOP_CATEGORIES_URL}`
@@ -98,8 +107,7 @@ export const setCurrentShop = (id) => {
           categories: categories.data,
           shopId: id,
         })
-      ); */
-      console.log(menu, categories);
+      );
     } catch (e) {
       console.log(e);
     }

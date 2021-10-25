@@ -1,0 +1,7 @@
+.selected {
+  position: absolute;
+  top: -25px;
+  left: 35%;
+
+  right: 0;
+}

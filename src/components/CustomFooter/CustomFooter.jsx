@@ -6,7 +6,6 @@ import { Group, Cell, Div, List, Footer, Tabbar } from "@vkontakte/vkui";
 import "./CustomFooter.css";
 import { PANELS, VIEWS } from "../../consts/conts";
 const CustomFooter = ({ activePanel , go }) => {
-  console.log("acive panel", activePanel);
   return (
     <Tabbar className='nav__tabbar'>
       <Group className='footer__group'>

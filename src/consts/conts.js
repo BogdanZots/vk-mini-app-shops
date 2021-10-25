@@ -10,12 +10,15 @@ export const VIEWS = {
   MAP_VIEW: "map",
 };
 export const PANELS = {
-  SEARCH_PANELS : ["home","map","current-shop","current-shop-product"],
+  SEARCH_PANELS : ["home","map","current-shop","current-shop-order-product"],
   MAIN_PANEL: "main",
-  CURRENT_CAFFE_PANEL: "current-caffe-panel",
+  CURRENT_SHOP_PANEL: "current-shop",
+  CURRENT_SHOP_ORDER_PANEL: "current-shop-order-product",
   MAP_PANEL: "map-panel",
 };
-
-
-
+export const TABS = {
+  small : 140,
+  medium : 160,
+  large : 180
+}
 

@@ -1,0 +1,26 @@
+.popup_buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.popup_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.popup-map__container{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.popup-map__img{
+    max-width: 50px;
+    object-fit: cover;
+}
+.popup-map__description{
+    display: flex;
+    flex-direction: column;
+}

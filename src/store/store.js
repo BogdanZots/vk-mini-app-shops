@@ -9,6 +9,6 @@ const redusers = combineReducers({
 });
 
 const store = createStore(redusers, applyMiddleware(thunk));
-window.store = store;
+window.redux = store;
 
 export default store;

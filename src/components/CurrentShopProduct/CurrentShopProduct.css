@@ -1,0 +1,37 @@
+.current-dish__cotnainer {
+  position: relative;
+  margin: 0;
+  margin-bottom: 150px;
+  padding: 0;
+}
+
+.back_button {
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  color: black;
+  background-color: white;
+  border-radius: 5px;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.vkuiCardGrid--ios.vkuiCardGrid--sizeX-compact {
+  padding: 0;
+}
+.vkuiCardGrid--l .vkuiCard:not(:first-child) {
+  margin-top: 0;
+}
+.current-dish__sizes {
+    width: 100%;
+  }
+.current-dish__size {
+  margin-right: 15px;
+  border-radius: 0 !important;
+  border: 1px solid #76787a !important;
+  position: relative;
+  padding: 10px;
+}

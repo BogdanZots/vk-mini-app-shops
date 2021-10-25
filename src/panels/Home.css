@@ -100,8 +100,7 @@
       overflow: visible;
   }
   .cards__container {
-    margin-top: 50px;
-    overflow: scroll;
+/*     margin-top: 50px; */
   }
  /*  .vkuiPanelHeader__right {
     display: none;
@@ -129,4 +128,15 @@
   }
   .header__home{
       margin-top: 0px;
+  }
+  .vkuiModalPage--ios .vkuiModalPage__in {
+    height: 250px;
+    border-radius: 14px;
+    bottom: 120%;
+  }
+  .card{
+    display: none;
+  }
+  .item__card {
+    margin-top: 18px !important;
   }
