@@ -25,7 +25,7 @@ const App = () => {
   const [popoup, setPopoup] = useState({
     state: true,
     panel: PANELS.MAIN_PANEL,
-    shop : null
+    shop: null,
   });
   const [userGeo, setUserGeo] = useState(null);
   const dispatch = useDispatch();
@@ -63,7 +63,8 @@ const App = () => {
     }
     setActivePanel(e.currentTarget.dataset.to);
   };
-
+  const params = window.location.search;
+  console.log("PARAMS", params);
   return (
     <AdaptivityProvider>
       <AppRoot>

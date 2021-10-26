@@ -13,12 +13,15 @@ import {
   Spacing,
   Title,
   Panel,
+  Button,
 } from "@vkontakte/vkui";
 import { useState } from "react";
 import { Icon16ShoppingCartOutline } from "@vkontakte/icons";
 import { PANELS } from "../../consts/conts";
 export default function CurrentShop({ go, id }) {
   const { currentShop } = useSelector((store) => store.shops);
+  const { currentUserOrder } = useSelector((store) => store.user);
+  console.log("USER ORDER", currentUserOrder);
   const [activeTab, setActiveTab] = useState("Напитки");
   return (
     <Panel id={id}>
@@ -122,6 +125,13 @@ export default function CurrentShop({ go, id }) {
             );
           })}
         </CardGrid>
+        {currentUserOrder.totalCount > 0 ? (
+            <Button size='l' stretched style={{ marginTop: 150 , position : 'absolute', bottom : 100}}>
+              Заказ : {currentUserOrder.totalCount} ₽
+            </Button>
+          ) : (
+            ""
+          )}
       </Group>
     </Panel>
   );

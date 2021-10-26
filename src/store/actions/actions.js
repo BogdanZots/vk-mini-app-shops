@@ -4,6 +4,7 @@ import {
   GET_ALL_SHOPS,
   SET_CURRENT_SHOP_MENU,
   SET_USER_GEO_DATA,
+  SET_USER_ORDER,
 } from "../actions-conts/actions-conts";
 
 export const setAllShopsAC = (payload) => {
@@ -34,6 +35,12 @@ export const setCurrentShopAC = (payload) => {
 export const setUserGeoDataAC = (payload) => {
   return {
     type: SET_USER_GEO_DATA,
+    payload,
+  };
+};
+export const setUserOrderAC = (payload) => {
+  return {
+    type: SET_USER_ORDER,
     payload,
   };
 };
