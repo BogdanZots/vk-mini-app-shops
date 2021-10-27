@@ -20,7 +20,6 @@ import { setUserOrder } from "../../store/reducers/userReducer";
 export default function CurrentShopProduct({ go }) {
   const { currentShop } = useSelector((store) => store.shops);
   const { currentUserOrder } = useSelector((store) => store.user);
-  console.log("USER ORDER", currentUserOrder);
   const [activeTab, setActiveTab] = useState(false);
   const dispatch = useDispatch();
   return (

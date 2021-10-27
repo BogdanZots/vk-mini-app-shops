@@ -9,40 +9,41 @@ import {
   Div,
   TabsItem,
   Tabs,
+  Spinner,
 } from "@vkontakte/vkui";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentShop } from "../store/reducers/shopReducer";
 import CustomHeaderBlock from "../components/CustomHeaderBlock/CustomHeaderBlock";
-
+import { setAllShops } from "../store/reducers/shopReducer";
+import { ITEMS_PER_PAGE } from "../consts/conts";
+import CustomSpinner from "../components/CustomSpinner/CustomSpinner";
 const Home = ({ id, go, fetchedUser, shops }) => {
   const { userAdress } = useSelector((store) => store.user);
+  const { currentItemsCount, totalItemsCount, currentPage, isLoading } =
+    useSelector((store) => store.shops);
   const dispatch = useDispatch();
-  
+  const page = currentPage + 1;
+  const scrollHandler = (e) => {
+    if (
+      e.target.documentElement.scrollHeight -
+        (e.target.documentElement.scrollTop + window.innerHeight) <
+        1 &&
+      currentPage * ITEMS_PER_PAGE <= totalItemsCount
+    ) {
+      dispatch(setAllShops(page, ITEMS_PER_PAGE));
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("scroll", scrollHandler);
+    return function () {
+      document.removeEventListener("scroll", scrollHandler);
+    };
+  }, [currentItemsCount, currentPage]);
+
   const filteredShops = shops;
   return (
     <Panel id={id}>
       <CustomHeaderBlock />
-      {/*       {fetchedUser && (
-        <Group
-          header={
-            <Header mode='secondary'>User Data Fetched with VK Bridge</Header>
-          }>
-          <Cell
-            before={
-              fetchedUser.photo_200 ? (
-                <Avatar src={fetchedUser.photo_200} />
-              ) : null
-            }
-            description={
-              fetchedUser.city && fetchedUser.city.title
-                ? fetchedUser.city.title
-                : ""
-            }>
-            {`${fetchedUser.first_name} ${fetchedUser.last_name}`}
-          </Cell>
-        </Group>
-      )} */}
-
       <Group>
         <Tabs className='select__tabs'>
           <TabsItem>Cписок заведений</TabsItem>
@@ -54,12 +55,14 @@ const Home = ({ id, go, fetchedUser, shops }) => {
       </Group>
       <Div>
         <CardGrid className='cards__container' data-to='current-shop' size='l'>
-          {filteredShops &&
+          {isLoading ? (
+            <Spinner />
+          ) : (
             filteredShops.map((shop) => {
               const id = shop.id;
               return (
                 <ContentCard
-                className="card"
+                  className='card'
                   onClick={(e) => {
                     dispatch(setCurrentShop(id));
                     go(e.target.closest(".cards__container"));
@@ -68,11 +71,35 @@ const Home = ({ id, go, fetchedUser, shops }) => {
                   className='item__card'
                   image={shop.img}
                   src={shop.img}
-                  subtitle={"Часы работы " + shop.workingFrom  + " - " + shop.workingTo}
+                  subtitle={
+                    "Часы работы " + shop.workingFrom + " - " + shop.workingTo
+                  }
                   header={"Рейтинг : " + shop.middleRate}
                   caption={"Адрес : " + shop.addressText}></ContentCard>
               );
-            })}
+            })
+          )}
+          {/*           {filteredShops &&
+            filteredShops.map((shop) => {
+              const id = shop.id;
+              return (
+                <ContentCard
+                  className='card'
+                  onClick={(e) => {
+                    dispatch(setCurrentShop(id));
+                    go(e.target.closest(".cards__container"));
+                  }}
+                  key={shop.id}
+                  className='item__card'
+                  image={shop.img}
+                  src={shop.img}
+                  subtitle={
+                    "Часы работы " + shop.workingFrom + " - " + shop.workingTo
+                  }
+                  header={"Рейтинг : " + shop.middleRate}
+                  caption={"Адрес : " + shop.addressText}></ContentCard>
+              );
+            })} */}
         </CardGrid>
       </Div>
     </Panel>

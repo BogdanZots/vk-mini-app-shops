@@ -54,7 +54,6 @@ export const setUserGeoData = (location) => {
     const geoData = await UserService.getGeo(
       `https://nominatim.openstreetmap.org/reverse?lat=${location.lat}&lon=${location.long}&zoom=18&addressdetails=1&format=json`
     );
-    console.log("GET DATA", geoData);
     dispatch(setUserGeoDataAC(geoData.address));
   };
 };

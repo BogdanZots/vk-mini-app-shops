@@ -41,7 +41,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    /*  setPopoup(true); */
     bridge.subscribe(({ detail: { type, data } }) => {
       if (type === "VKWebAppUpdateConfig") {
         const schemeAttribute = document.createAttribute("scheme");
@@ -63,8 +62,6 @@ const App = () => {
     }
     setActivePanel(e.currentTarget.dataset.to);
   };
-  const params = window.location.search;
-  console.log("PARAMS", params);
   return (
     <AdaptivityProvider>
       <AppRoot>

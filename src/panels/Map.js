@@ -18,12 +18,6 @@ import { PANELS } from "../consts/conts";
 const Map = (props) => {
   const dispatch = useDispatch();
   const { shops } = useSelector((store) => store.shops);
-  const shopsArray = shops.map((shop, i) => {
-    return {
-      ...shop,
-      cord: [shop.locationLat, shop.locationLng],
-    };
-  });
   const [localMap, setLocalMap] = useState("");
   const handleLoad = () => {
     window.ymaps.ready(() => {
@@ -45,8 +39,8 @@ const Map = (props) => {
     handleLoad();
   }, []);
 
-  shopsArray.forEach((shop, i) => {
-    const template = `<div id="map_point" class="map_point" data-to="current-shop"   data-id=${shopsArray[i].id} class="text">
+  shops.forEach((shop, i) => {
+    const template = `<div id="map_point" class="map_point" data-to="current-shop"   data-id=${shops[i].id} class="text">
     <svg width="45" height="45" viewBox="0 0 43 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M39.3987 14.268L34.2549 6.33511L27.0508 3.11149L27.191 2.25652L24.528 1.99023L24.1776 1.83605L24.1636 1.96219L20.5475 1.59778L20.5335 1.20534L19.7346 1.51369L16.6792 1.19133L16.9735 2.57889L11.7456 4.62519L2.52323 13.6233L2.08874 26.4898L20.954 57.3665L29.3214 44.7103L36.8198 32.4885L40.0294 23.9109L39.3987 14.268ZM24.8223 29.2789L16.6792 28.424L12.3903 22.201L14.745 14.0578L19.5944 12.2217L22.9022 12.7684L27.191 14.9128L29.3354 23.4904L24.8223 29.2789Z" fill="#F48542"/>
 <path d="M21.0096 0C9.4186 0 0 9.4186 0 21.0096C0 24.92 1.07921 28.7463 3.13953 32.0541L19.8183 58.9363C20.1407 59.4549 20.7013 59.7632 21.304 59.7632H21.318C21.9347 59.7632 22.4953 59.4409 22.8037 58.9083L39.062 31.7738C40.9961 28.5361 42.0193 24.8079 42.0193 21.0096C42.0193 9.4186 32.6007 0 21.0096 0ZM36.0486 29.9797L21.2759 54.6475L6.11088 30.218C4.40095 27.4569 3.47591 24.2753 3.47591 21.0096C3.47591 11.3528 11.3528 3.47591 21.0096 3.47591C30.6665 3.47591 38.5294 11.3528 38.5294 21.0096C38.5294 24.1772 37.6604 27.2747 36.0486 29.9797Z" fill="black"/>
@@ -54,7 +48,7 @@ const Map = (props) => {
 </svg>
 
     <div class="place_title">
-    <div>${shopsArray[i].name}</div>
+    <div>${shops[i].name}</div>
     <div>
     <img src="https://cdn1.iconfinder.com/data/icons/interface-travel-and-environment/64/star-interface-256.png" style="width:12px;heigth:12px">
     <span class="text_small">
@@ -66,9 +60,9 @@ const Map = (props) => {
     let content = ymaps?.templateLayoutFactory?.createClass(template);
     if (window.ymaps.GeoObject) {
       const myGeoObject = new ymaps.Placemark(
-        shopsArray[i].cord,
+        shops[i].location,
         {
-          hintContent: shopsArray[i].name,
+          hintContent: shops[i].name,
         },
         {
           iconLayout: content,
@@ -97,9 +91,6 @@ const Map = (props) => {
   });
   return (
     <Panel id={props.id}>
-      {/*   <PanelHeader left={<PanelHeaderBack onClick={props.go} data-to='home' />}>
-
-      </PanelHeader> */}
       <CustomHeaderBlock className='header__block-map' />
       <Group>
         <Tabs className='select__tabs-map'>

@@ -10,25 +10,37 @@ import {
   CHECK_PANEL,
   CHECK_VIEW,
   GET_ALL_SHOPS,
+  SET_CURRENT_SHOP_LOADING,
   SET_CURRENT_SHOP_MENU,
+  SET_LOADING,
 } from "../actions-conts/actions-conts";
-import { setAllShopsAC, setCurrentShopAC } from "../actions/actions";
+import {
+  setAllShopsAC,
+  setCurrentShopAC,
+  setCurrentShopLoadingAC,
+  setLoadingAC,
+} from "../actions/actions";
 import {
   VIEWS,
   PANELS,
-  ALL_SHPS_URL,
-  CURRENT_SHOP_URL,
+  ALL_SHOPS_URL,
   CURRENT_SHOP_CATEGORIES_URL,
   CURRENT_SHOP_MENU_URL,
+  ITEMS_PER_PAGE,
 } from "../../consts/conts";
 
 const initialState = {
   shops: [],
+  currentItemsCount: ITEMS_PER_PAGE,
+  totalItemsCount: 0,
+  currentPage: 0,
+  isLoading: true,
   activePanels: {
     [VIEWS.HOME_VIEW]: PANELS.MAIN_PANEL,
   },
   activeView: VIEWS.HOME_VIEW,
   currentShop: {
+    isLoading: true,
     id: 0,
     caption: "",
     img: "",
@@ -36,7 +48,8 @@ const initialState = {
     menu: [],
     middleRate: null,
     addressText: "",
-    catigories: [],
+    activeCategory: null,
+    categories: [],
     workingFrom: "",
     workingTo: "",
   },
@@ -46,9 +59,15 @@ const shopsReducer = (state = initialState, action) => {
   let stateCopy = { ...state };
   switch (action.type) {
     case GET_ALL_SHOPS:
-      stateCopy.shops = [
-        ...action.payload.sort((a, b) => a.middleRate - b.middleRate),
-      ];
+      console.log(action);
+      stateCopy.currentPage = action.payload.page;
+      const arr1 = action.payload.content.sort(
+        (a, b) => a.middleRate - b.middleRate
+      );
+      stateCopy.shops = [...new Set([...stateCopy.shops, ...arr1])];
+      stateCopy.totalItemsCount = action.payload.totalElements;
+      if (stateCopy.currentItemsCount <= stateCopy.totalItemsCount) {
+      }
       return {
         ...stateCopy,
       };
@@ -62,17 +81,24 @@ const shopsReducer = (state = initialState, action) => {
       return {
         ...stateCopy,
       };
+    case SET_LOADING:
+      stateCopy.isLoading = action.payload;
+      return {
+        ...stateCopy,
+      };
+      case SET_CURRENT_SHOP_LOADING :
+        stateCopy.currentShop.isLoading = action.payload
+        return{
+          ...stateCopy
+        }
     case SET_CURRENT_SHOP_MENU:
-      console.log("ACTION", action);
       const id = +action.payload.shopId;
-      stateCopy.currentShop.catigories = action.payload.categories;
-      stateCopy.currentShop.menu = action.payload.menu;
-      stateCopy.currentShop.name = stateCopy.shops[id - 1].name;
-      stateCopy.currentShop.img = stateCopy.shops[id - 1].img;
-      stateCopy.currentShop.workingFrom = stateCopy.shops[id - 1].workingFrom;
-      stateCopy.currentShop.workingTo = stateCopy.shops[id - 1].workingTo;
-      stateCopy.currentShop.addressText = stateCopy.shops[id - 1].addressText;
-      stateCopy.currentShop.middleRate = stateCopy.shops[id - 1].middleRate;
+      const currentShop = stateCopy.shops.find((shop) => id === shop.id);
+      stateCopy.currentShop = {
+        ...currentShop,
+        menu: action.payload.menu,
+        categories: action.payload.categories,
+      };
 
       return {
         ...stateCopy,
@@ -82,28 +108,42 @@ const shopsReducer = (state = initialState, action) => {
   }
 };
 
-export const setAllShops = () => {
+export const setAllShops = (pageNum = 1, pageSize = 2) => {
+  console.log("PAGE SIZE", pageSize);
   return async function (dispatch) {
     try {
-      const data = await ShopService.getAllShops(ALL_SHPS_URL);
-      dispatch(setAllShopsAC(data.data));
+      const data = await ShopService.getAllShops(
+        `${ALL_SHOPS_URL}?pageNumber=${pageNum}&pageSize=${pageSize}&lat=0&lng=0`
+      );
+      dispatch(setLoadingAC(false));
+      dispatch(
+        setAllShopsAC({
+          content: data.data.content,
+          totalElements: data.data.totalElements,
+          page: pageNum,
+        })
+      );
     } catch (e) {
       console.log(e);
     }
   };
 };
-export const setCurrentShop = (id) => {
+export const setCurrentShop = (id, categoryId, pageNum = 1, pageSize = 5) => {
   return async function (dispatch) {
     try {
-      const menu = await ShopService.getCurrentShopMenu(
-        `${CURRENT_SHOP_MENU_URL}${id}/menu`
-      );
+      dispatch(setCurrentShopLoadingAC(true));
       const categories = await ShopService.getCurrentShopCategories(
         `${CURRENT_SHOP_MENU_URL}${id}/${CURRENT_SHOP_CATEGORIES_URL}`
       );
+      const catId = categoryId || categories.data[0].id;
+      const menu = await ShopService.getCurrentShopMenu(
+        `${CURRENT_SHOP_MENU_URL}${id}/category/${catId}/menu?pageNumber=${pageNum}&pageSize=${pageSize}&lat=0&lng=0`
+      );
+      dispatch(setCurrentShopLoadingAC(false))
+      console.log("menu", menu, "cat", categories);
       dispatch(
         setCurrentShopAC({
-          menu: menu.data,
+          menu: menu.data.content,
           categories: categories.data,
           shopId: id,
         })
