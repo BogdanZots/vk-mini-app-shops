@@ -54,7 +54,7 @@ const Home = ({
       <CustomHeaderBlock />
       <Group>
         <Tabs className='select__tabs'>
-          <TabsItem>Cписок заведений</TabsItem>
+          <TabsItem>Cписок заведений2</TabsItem>
           <TabsItem
             data-to='map'
             data-item='map-btn'
@@ -93,7 +93,7 @@ const Home = ({
                   }}
                   key={shop.id}
                   className='item__card'
-                  image={shop.img}
+                  /* image={shop.img} */
                   src={shop.img}
                   subtitle={
                     "Часы работы " + shop.workingFrom + " - " + shop.workingTo
