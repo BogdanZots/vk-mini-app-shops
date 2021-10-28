@@ -10,6 +10,7 @@ import {
   Button,
   Input,
   PanelHeaderButton,
+  Spinner,
 } from "@vkontakte/vkui";
 import "@vkontakte/vkui/dist/vkui.css";
 import { Icon16Clear } from "@vkontakte/icons";
@@ -17,9 +18,8 @@ import "./Popup.css";
 import { PANELS } from "../../consts/conts";
 import { useDispatch, useSelector } from "react-redux";
 
-const Popup = ({ modalActive, setModalActive, getGeo , go }) => {
+const Popup = ({ modalActive, setModalActive, getGeo, go }) => {
   const { currentShop } = useSelector((store) => store.shops);
-  console.log("POPUP DATA", currentShop);
   const styles = {
     container: "popup_container",
     buttons: "popup_buttons",
@@ -31,21 +31,14 @@ const Popup = ({ modalActive, setModalActive, getGeo , go }) => {
     description: "popup-map__description",
     button: "popup-map__button",
   };
-  console.log("MODAL DATA", modalActive);
-  return (
-    <ModalRoot
-      activeModal={modalActive.state ? "modalPage" : null}
-      onClose={() => {
-        setModalActive(false);
-      }}>
-      <ModalPage id='modalPage'>
-        <ModalPageHeader
-          right={
-            <PanelHeaderButton
-              onClick={() => setModalActive(false)}></PanelHeaderButton>
-          }></ModalPageHeader>
-        <Separator />
-        {modalActive.panel === PANELS.MAIN_PANEL ? (
+/*   const goToMapStyles = {
+    container 
+    
+  } */
+  const renderSwitch = (param) => {
+    switch (param) {
+      case PANELS.MAIN_PANEL:
+        return (
           <div className={styles.container}>
             <h2>
               Чтобы увидеть заведения на карте, необходимо разрешить передачу
@@ -67,7 +60,9 @@ const Popup = ({ modalActive, setModalActive, getGeo , go }) => {
               </Div>
             </div>
           </div>
-        ) : (
+        );
+      case PANELS.MAP_PANEL:
+        return (
           <div className={mapStyles.container}>
             <div className={mapStyles.imgContainer}>
               <img src={currentShop.img} className={mapStyles.img} />
@@ -81,15 +76,40 @@ const Popup = ({ modalActive, setModalActive, getGeo , go }) => {
               <span>Adress : {currentShop.addressText}</span>
             </div>
             <div className={mapStyles.button}>
-              <Div onClick={() =>{
-                 go(modalActive.shop)
-                 setModalActive({...modalActive,state:false})
-              }}>
+              <Div
+                onClick={() => {
+                  go(modalActive.shop);
+                  setModalActive({ ...modalActive, state: false });
+                }}>
                 <Button>Перейти</Button>
               </Div>
             </div>
           </div>
-        )}
+        );
+      case "map-btn":
+        <div className={mapStyles.container}>
+
+        </div>;
+      default:
+        return "";
+    }
+  };
+
+  console.log("MODAL DATA", modalActive);
+  return (
+    <ModalRoot
+      activeModal={modalActive.state ? "modalPage" : null}
+      onClose={() => {
+        setModalActive(false);
+      }}>
+      <ModalPage id='modalPage'>
+        <ModalPageHeader
+          right={
+            <PanelHeaderButton
+              onClick={() => setModalActive(false)}></PanelHeaderButton>
+          }></ModalPageHeader>
+        {renderSwitch(modalActive.panel || modalActive.target)}
+        <Separator />
       </ModalPage>
     </ModalRoot>
   );

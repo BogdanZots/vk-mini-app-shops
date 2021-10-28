@@ -25,6 +25,7 @@ const App = () => {
   const [popoup, setPopoup] = useState({
     state: true,
     panel: PANELS.MAIN_PANEL,
+    target : '',
     shop: null,
   });
   const [userGeo, setUserGeo] = useState(null);
@@ -75,7 +76,15 @@ const App = () => {
               go={go}
             />
           }>
-          <Home id='home' fetchedUser={fetchedUser} shops={shops} go={go} />
+          <Home
+            modalActive={popoup}
+            setModalActive={setPopoup}
+            userGeo={userGeo}
+            id='home'
+            fetchedUser={fetchedUser}
+            shops={shops}
+            go={go}
+          />
           <Map setModalActive={setPopoup} id='map' go={go} />
           <CurrentShop id='current-shop' go={go} />
           <CurrentShopProduct id='current-shop-order-product' go={go} />

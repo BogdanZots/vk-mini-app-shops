@@ -15,9 +15,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentShop } from "../store/reducers/shopReducer";
 import CustomHeaderBlock from "../components/CustomHeaderBlock/CustomHeaderBlock";
 import { setAllShops } from "../store/reducers/shopReducer";
-import { ITEMS_PER_PAGE } from "../consts/conts";
+import { ITEMS_PER_PAGE, PANELS } from "../consts/conts";
 import CustomSpinner from "../components/CustomSpinner/CustomSpinner";
-const Home = ({ id, go, fetchedUser, shops }) => {
+const Home = ({
+  id,
+  go,
+  fetchedUser,
+  shops,
+  userGeo,
+  modalActive,
+  setModalActive,
+}) => {
   const { userAdress } = useSelector((store) => store.user);
   const { currentItemsCount, totalItemsCount, currentPage, isLoading } =
     useSelector((store) => store.shops);
@@ -47,7 +55,23 @@ const Home = ({ id, go, fetchedUser, shops }) => {
       <Group>
         <Tabs className='select__tabs'>
           <TabsItem>Cписок заведений</TabsItem>
-          <TabsItem data-to='map' onClick={(e) => go(e)}>
+          <TabsItem
+            data-to='map'
+            data-item='map-btn'
+            onClick={(e) => {
+              if (!userGeo) {
+                setModalActive({
+                  state: true,
+                  panel: PANELS.MAIN_PANEL,
+                  target: "map-btn",
+                  shop: false,
+                });
+              /*   const popup = document.querySelector(".vkuiModalPage__in");
+                console.log(popup); */
+                return;
+              }
+              go(e);
+            }}>
             Карта заведений
           </TabsItem>
         </Tabs>
@@ -79,27 +103,6 @@ const Home = ({ id, go, fetchedUser, shops }) => {
               );
             })
           )}
-          {/*           {filteredShops &&
-            filteredShops.map((shop) => {
-              const id = shop.id;
-              return (
-                <ContentCard
-                  className='card'
-                  onClick={(e) => {
-                    dispatch(setCurrentShop(id));
-                    go(e.target.closest(".cards__container"));
-                  }}
-                  key={shop.id}
-                  className='item__card'
-                  image={shop.img}
-                  src={shop.img}
-                  subtitle={
-                    "Часы работы " + shop.workingFrom + " - " + shop.workingTo
-                  }
-                  header={"Рейтинг : " + shop.middleRate}
-                  caption={"Адрес : " + shop.addressText}></ContentCard>
-              );
-            })} */}
         </CardGrid>
       </Div>
     </Panel>

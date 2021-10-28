@@ -1,14 +1,56 @@
 import React from "react";
-import "./CustomHeaderBlock.css"
-import { Spacing,Title,Div,Search } from "@vkontakte/vkui";
+import "./CustomHeaderBlock.css";
+import { Spacing, Title, Div, Search } from "@vkontakte/vkui";
+import { Icon24Search } from "@vkontakte/icons";
+import { compose } from "redux";
+import { useDispatch } from "react-redux";
+import { setUserGeoDataAC } from "../../store/actions/actions";
 export default function CustomHeaderBlock() {
+  const dispatch = useDispatch();
   return (
     <div class='header__block'>
       <Spacing size={16} />
       <Title className='header__block-title'>Заказывай еду ко времени</Title>
       <Spacing size={16} />
       <Div className='header__block-options'>
-        <Search className='header__block-search' />
+        <Search
+          className='header__block-search'
+          icon={<Icon24Search />}
+          onIconClick={(e) => {
+            const parentEl = e.target.parentElement
+              .closest(".vkuiSearch__icons")
+              .closest(".Search__after").parentElement;
+            const inputValue = parentEl
+              .querySelector(".Search__input")
+              .value.split(" ");
+            console.log(inputValue);
+            const getGeo = async () => {
+              const res = await fetch(
+                `https://nominatim.openstreetmap.org/?addressdetails=1&q=${
+                  inputValue[0] ? inputValue[0] : ""
+                }+${inputValue[1] ? inputValue[1] : ""}+${
+                  inputValue[2] ? inputValue[2] : ""
+                }&format=json&limit=1`
+              );
+              const data = await res.json();
+              const adress = {
+                city: data[0].address?.city,
+                amenity: data[0].address?.amenity,
+                road: data[0].address?.road,
+                houseNumber: data[0].address?.house_number,
+              };
+              const dataEdited = Object.values(adress).filter((prop) => {
+                if (prop !== undefined || null) {
+                  if (prop.length) {
+                    return prop;
+                  }
+                }
+              });
+              dispatch(setUserGeoDataAC({ data: dataEdited, type: "search" }));
+            };
+            getGeo();
+          }}
+        />
         <Div className='geo'>
           <svg
             width='20'

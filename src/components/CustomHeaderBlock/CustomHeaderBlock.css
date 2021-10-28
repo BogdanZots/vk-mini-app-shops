@@ -21,6 +21,9 @@
     max-width: 70%;
   }
  .Search__after{
+   background-color: inherit;
+ }
+ .vkuiSearch__after-in{
    display: none;
  }
  .geo{
@@ -28,4 +31,7 @@
    padding: 10px;
    border-radius: 10px;
    display: none;
+ }
+ .vkuiSearch__placeholder svg{
+   display: none !important;
  }

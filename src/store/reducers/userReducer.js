@@ -28,7 +28,14 @@ const userReducer = (state = initialState, action) => {
   let stateCopy = { ...state };
   switch (action.type) {
     case SET_USER_GEO_DATA:
-      stateCopy.userAdress = action.payload.city + " , " + action.payload.road;
+      console.log(action);
+      if (action.payload.type === "auto") {
+        stateCopy.userAdress =
+          action.payload.data.city + " , " + action.payload.data.road;
+      }
+      if (action.payload.type === "search") {
+        stateCopy.userAdress =  action.payload.data.join(" , ")
+      }
       return {
         ...stateCopy,
       };
@@ -40,9 +47,11 @@ const userReducer = (state = initialState, action) => {
       if (action.payload.type === "adds") {
         stateCopy.currentUserOrder.addsCount += action.payload.count;
       }
-      stateCopy.currentUserOrder.totalCount = stateCopy.currentUserOrder.sizeCount + stateCopy.currentUserOrder.addsCount
+      stateCopy.currentUserOrder.totalCount =
+        stateCopy.currentUserOrder.sizeCount +
+        stateCopy.currentUserOrder.addsCount;
       return {
-        ...stateCopy
+        ...stateCopy,
       };
     default:
       return state;
@@ -54,7 +63,7 @@ export const setUserGeoData = (location) => {
     const geoData = await UserService.getGeo(
       `https://nominatim.openstreetmap.org/reverse?lat=${location.lat}&lon=${location.long}&zoom=18&addressdetails=1&format=json`
     );
-    dispatch(setUserGeoDataAC(geoData.address));
+    dispatch(setUserGeoDataAC({ data: geoData.address, type: "auto" }));
   };
 };
 export const setUserOrder = (e) => {
