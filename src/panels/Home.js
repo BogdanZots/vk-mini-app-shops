@@ -94,7 +94,9 @@ const Home = ({
                   key={shop.id}
                   className='item__card'
                   image={shop.img}
-                  /*     src={shop.img} */
+                  src={shop.img}
+                  img={shop.img}
+                  alt={shop.name}
                   subtitle={
                     "Часы работы " + shop.workingFrom + " - " + shop.workingTo
                   }
