@@ -55,7 +55,7 @@ const Home = ({
       <CustomHeaderBlock />
       <Group>
         <Tabs className='select__tabs'>
-          <TabsItem>Cписок заведений5</TabsItem>
+          <TabsItem>Cписок заведений6</TabsItem>
           <TabsItem
             data-to='map'
             data-item='map-btn'
@@ -96,15 +96,15 @@ const Home = ({
                   }}
                   key={shop.id}
                   className='item__card'
-                  image={shop.url || persik}
-                  src={shop.url || persik}
-                  img={shop.url || persik}
+                  image={shop.img || persik}
+                  src={shop.img || persik}
+                  img={shop.img || persik}
                   alt={shop.name}
                   subtitle={
                     "Часы работы " + shop.workingFrom + " - " + shop.workingTo
                   }
                   header={"Рейтинг : " + shop.middleRate}
-                  caption={"Адрес : " + shop.addressText}></ContentCard>
+                  caption={"Адрес : " + shop.addressText}>Url к фото {shop.img}</ContentCard>
               );
             })
           )}
