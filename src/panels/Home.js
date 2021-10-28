@@ -54,7 +54,7 @@ const Home = ({
       <CustomHeaderBlock />
       <Group>
         <Tabs className='select__tabs'>
-          <TabsItem>Cписок заведений2</TabsItem>
+          <TabsItem>Cписок заведений3</TabsItem>
           <TabsItem
             data-to='map'
             data-item='map-btn'
@@ -66,7 +66,7 @@ const Home = ({
                   target: "map-btn",
                   shop: false,
                 });
-              /*   const popup = document.querySelector(".vkuiModalPage__in");
+                /*   const popup = document.querySelector(".vkuiModalPage__in");
                 console.log(popup); */
                 return;
               }
@@ -93,8 +93,8 @@ const Home = ({
                   }}
                   key={shop.id}
                   className='item__card'
-                  /* image={shop.img} */
-                  src={shop.img}
+                  image={shop.img}
+                  /*     src={shop.img} */
                   subtitle={
                     "Часы работы " + shop.workingFrom + " - " + shop.workingTo
                   }
