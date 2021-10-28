@@ -85,6 +85,7 @@ const Home = ({
             <Spinner />
           ) : (
             filteredShops.map((shop) => {
+              console.log(shop)
               const id = shop.id;
               return (
                 <ContentCard
@@ -95,9 +96,9 @@ const Home = ({
                   }}
                   key={shop.id}
                   className='item__card'
-                  image={persik}
-                  src={persik}
-                  img={persik}
+                  image={shop.url || persik}
+                  src={shop.url || persik}
+                  img={shop.url || persik}
                   alt={shop.name}
                   subtitle={
                     "Часы работы " + shop.workingFrom + " - " + shop.workingTo
