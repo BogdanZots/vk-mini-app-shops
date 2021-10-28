@@ -54,7 +54,7 @@ const Home = ({
       <CustomHeaderBlock />
       <Group>
         <Tabs className='select__tabs'>
-          <TabsItem>Cписок заведений3</TabsItem>
+          <TabsItem>Cписок заведений4</TabsItem>
           <TabsItem
             data-to='map'
             data-item='map-btn'
