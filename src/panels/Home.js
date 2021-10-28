@@ -17,6 +17,7 @@ import CustomHeaderBlock from "../components/CustomHeaderBlock/CustomHeaderBlock
 import { setAllShops } from "../store/reducers/shopReducer";
 import { ITEMS_PER_PAGE, PANELS } from "../consts/conts";
 import CustomSpinner from "../components/CustomSpinner/CustomSpinner";
+import persik from "../img/persik.png";
 const Home = ({
   id,
   go,
@@ -78,6 +79,7 @@ const Home = ({
         Adress : {userAdress}
       </Group>
       <Div>
+     {/*    <img src={persik} /> */}
         <CardGrid className='cards__container' data-to='current-shop' size='l'>
           {isLoading ? (
             <Spinner />
@@ -93,9 +95,9 @@ const Home = ({
                   }}
                   key={shop.id}
                   className='item__card'
-                  image={shop.img}
-                  src={shop.img}
-                  img={shop.img}
+                  image={persik}
+                  src={persik}
+                  img={persik}
                   alt={shop.name}
                   subtitle={
                     "Часы работы " + shop.workingFrom + " - " + shop.workingTo
