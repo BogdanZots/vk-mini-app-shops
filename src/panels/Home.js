@@ -55,7 +55,7 @@ const Home = ({
       <CustomHeaderBlock />
       <Group>
         <Tabs className='select__tabs'>
-          <TabsItem>Cписок заведений7</TabsItem>
+          <TabsItem>Cписок заведений8</TabsItem>
           <TabsItem
             data-to='map'
             data-item='map-btn'
@@ -79,13 +79,13 @@ const Home = ({
         Adress : {userAdress}
       </Group>
       <Div>
-     {/*    <img src={persik} /> */}
+        {/*    <img src={persik} /> */}
         <CardGrid className='cards__container' data-to='current-shop' size='l'>
           {isLoading ? (
             <Spinner />
           ) : (
             filteredShops.map((shop) => {
-              console.log(shop)
+              console.log(shop);
               const id = shop.id;
               return (
                 <ContentCard
@@ -103,8 +103,7 @@ const Home = ({
                   subtitle={
                     "Часы работы " + shop.workingFrom + " - " + shop.workingTo
                   }
-                  /* header={"Рейтинг : " + shop.middleRate} */
-                  header={"URL IMG",shop.img}
+                  header={"Рейтинг : " + shop.middleRate}
                   caption={"Адрес : " + shop.addressText}></ContentCard>
               );
             })
