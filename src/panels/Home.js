@@ -96,9 +96,9 @@ const Home = ({
                   }}
                   key={shop.id}
                   className='item__card'
-                  image="https://cdn2.iconfinder.com/data/icons/basic-flat-icon-set/128/store-128.png"
-                  src="https://cdn2.iconfinder.com/data/icons/basic-flat-icon-set/128/store-128.png"
-                  img="https://cdn2.iconfinder.com/data/icons/basic-flat-icon-set/128/store-128.png"
+                  image={shop.img}
+                  src={shop.img}
+                  img={shop.img}
                   alt={shop.name}
                   subtitle={
                     "Часы работы " + shop.workingFrom + " - " + shop.workingTo
